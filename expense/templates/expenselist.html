@@ -1,0 +1,55 @@
+{%extends 'sidebar.html' %} {%block body%} {%if expl %}
+<table border="10" cellspacing="10">
+    <tr>
+        <th>Id</th>
+        <th>Expense</th>
+        <th>ExpenseType</th>
+        <th>ExpenseDate</th>
+        <th>Description</th>
+        <th>User</th>
+        <th colspan="2">Action</th>
+    </tr>
+
+    {%for i in expl%}
+    <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.expense}}</td>
+        <td>{{i.expense_type}}</td>
+        <td>{{i.expense_date}}</td>
+        <td><textarea cols="30" rows="2">{{i.description}}</textarea></td>
+        <td>{{i.user}}</td>
+        <td><a href="{%url 'expense:delete' i.id %}"> Delete</a></td>
+        <td><a href=""> Edit</a></td>
+    </tr>
+
+    {%endfor%}
+</table>
+
+{%else%}
+<h1> No Records Found ...</h1>
+{%endif%}
+<style>
+    .rside {
+        width: 250px;
+        height: 100%;
+        background-color: rgb(183, 227, 227);
+        position: fixed;
+        top: 0%;
+        right: 0%;
+        border: 4px solid #000;
+        box-shadow: 5px 5px 15px rgba(116, 227, 64, 0.5);
+    }
+    
+    h3 {
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
+<div class="rside">
+    <h2>Sort By ExpenseType</h2>
+    <h3><a href="{%url 'expense:list' %}">All</a></h3>
+    {%for i in expt %}
+    <h3><a href="{%url 'expense:ext' i %}">{{i}}</a></h3>
+    {%endfor%}
+</div>
+{%endblock%}
